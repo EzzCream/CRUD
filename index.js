@@ -24,7 +24,7 @@ for (let index = 0; index < listaGatos.length; index++) {
             </div>
             <div class="category">Raza: ${listaGatos[index].raza}</div>
             <div class="heading">Nombre: ${listaGatos[index].nombre}</div>
-            <button type="button" onclick="deleteCat('${listaGatos[index].nombre}')" class="btn btn-light">
+            <button type="button" onclick="deleteCat('${listaGatos[index].nombre}')" class="btn btn-danger mb-1">
 				Borrar
 			</button>
             <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -52,24 +52,27 @@ for (let index = 0; index < listaGatos.length; index++) {
 							<input
 								class="form-control form-control-lg m-1"
 								type="text"
-								id="nombre"
+								id="nombreupd"
 								placeholder="Nombre"
                                 value= "${listaGatos[index].nombre}"
 							/>
 							<input
 								class="form-control form-control-lg m-1"
 								type="text"
-								id="raza"
+								id="razaupd"
 								placeholder="Raza"
                                 value= "${listaGatos[index].raza}"
 							/>
 							<input
 								class="form-control form-control-lg m-1"
 								type="text"
-								id="link"
+								id="linkupd"
 								placeholder="Link img"
                                 value= "${listaGatos[index].link}"
 							/>
+                            <button type="button" onclick="updateCat('${listaGatos[index].nombre}')" class="btn btn-primary">
+			                    Actualizar
+			                </button>
 						</div>
 					</div>
 				</div>
@@ -97,6 +100,21 @@ function addCat() {
 
 const deleteCat = (list) => {
 	const resultado = listaGatos.filter((res) => res.nombre != list);
+	localStorage.setItem('Michis', JSON.stringify(resultado));
+	window.location.reload();
+};
+
+const updateCat = (name) => {
+	const nombre = document.getElementById('nombreupd').value;
+	const raza = document.getElementById('razaupd').value;
+	const link = document.getElementById('linkupd').value;
+	const obj = {
+		nombre,
+		raza,
+		link,
+	};
+	const resultado = listaGatos.filter((res) => res.nombre != name);
+	resultado.push(obj);
 	localStorage.setItem('Michis', JSON.stringify(resultado));
 	window.location.reload();
 };
