@@ -9,10 +9,31 @@ if (!listaGatos) {
 	localStorage.setItem('Michis', JSON.stringify([michi]));
 }
 
+let ren = '';
+
 for (let index = 0; index < listaGatos.length; index++) {
-	console.log(listaGatos);
-	console.log(index);
+	const ind = `
+        <div class="card">
+            <div class="card-image">
+                <img
+                    class="img-gato"
+                    src="${listaGatos[index].link}"
+                    alt=""
+                />
+            </div>
+            <div class="category">Raza: ${listaGatos[index].raza}</div>
+            <div class="heading">Nombre: ${listaGatos[index].nombre}</div>
+            <button type="button" onclick="deleteCat('${listaGatos[index].nombre}')" class="btn btn-light">
+				Borrar
+			</button>
+            <button type="button" onclick="deleteCat('${listaGatos[index].nombre}')" class="btn btn-light">
+				Actualizar
+			</button>
+        </div>`;
+	ren = ind + ren;
 }
+
+const div = (document.getElementById('main').innerHTML = ren);
 
 function addCat() {
 	const nombre = document.getElementById('nombre').value;
@@ -26,5 +47,11 @@ function addCat() {
 	const listaGatos = JSON.parse(localStorage.getItem('Michis'));
 	listaGatos.push(obj);
 	localStorage.setItem('Michis', JSON.stringify(listaGatos));
-	console.log(listaGatos);
+	window.location.reload();
 }
+
+const deleteCat = (list) => {
+	const resultado = listaGatos.filter((res) => res.nombre != list);
+	localStorage.setItem('Michis', JSON.stringify(resultado));
+	window.location.reload();
+};
