@@ -7,6 +7,7 @@ if (!listaGatos) {
 		link: 'https://t1.ea.ltmcdn.com/es/razas/1/7/8/gato-americano-de-pelo-corto_871_0_orig.jpg',
 	};
 	localStorage.setItem('Michis', JSON.stringify([michi]));
+	window.location.reload();
 }
 
 let ren = '';
@@ -26,9 +27,53 @@ for (let index = 0; index < listaGatos.length; index++) {
             <button type="button" onclick="deleteCat('${listaGatos[index].nombre}')" class="btn btn-light">
 				Borrar
 			</button>
-            <button type="button" onclick="deleteCat('${listaGatos[index].nombre}')" class="btn btn-light">
-				Actualizar
-			</button>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="flush-headingOne">
+						<button
+							class="accordion-button collapsed"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#flush-collapseOne"
+							aria-expanded="false"
+							aria-controls="flush-collapseOne"
+						>
+							Actualizar
+						</button>
+					</h2>
+					<div
+						id="flush-collapseOne"
+						class="accordion-collapse collapse"
+						aria-labelledby="flush-headingOne"
+						data-bs-parent="#accordionFlushExample"
+						style="width: 200px"
+					>
+						<div class="accordion-body">
+							<input
+								class="form-control form-control-lg m-1"
+								type="text"
+								id="nombre"
+								placeholder="Nombre"
+                                value= "${listaGatos[index].nombre}"
+							/>
+							<input
+								class="form-control form-control-lg m-1"
+								type="text"
+								id="raza"
+								placeholder="Raza"
+                                value= "${listaGatos[index].raza}"
+							/>
+							<input
+								class="form-control form-control-lg m-1"
+								type="text"
+								id="link"
+								placeholder="Link img"
+                                value= "${listaGatos[index].link}"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>`;
 	ren = ind + ren;
 }
